@@ -27,7 +27,6 @@ namespace Envanter
             cmd.CommandType = CommandType.Text;
             cmd.CommandText =
                 $"SELECT * FROM Registration WHERE Username='{textBoxUsername.Text}' AND Password='{textBoxPassword.Text}'";
-            cmd.ExecuteNonQuery();
             var dt = new DataTable();
             var da = new SqlDataAdapter(cmd);
             da.Fill(dt);
@@ -42,6 +41,11 @@ namespace Envanter
             {
                 MessageBox.Show("Wrong username or password");
             }
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
