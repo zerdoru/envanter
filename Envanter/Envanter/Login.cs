@@ -37,7 +37,9 @@ namespace Envanter
 
             if (dt.Rows.Count > 0)
             {
-                MessageBox.Show("Connected");
+                Hide();
+                var mdi = new MDIParent1();
+                mdi.Show();
             }
             else
             {
