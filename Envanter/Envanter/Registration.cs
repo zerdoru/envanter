@@ -19,6 +19,8 @@ namespace Envanter
         private void UserRegister_Load(object sender, EventArgs e)
         {
             if (_connection.State != ConnectionState.Open) _connection.Open();
+
+            ListUsersToGrid();
         }
 
         private void buttonRegister_Click(object sender, EventArgs e)
@@ -48,12 +50,37 @@ namespace Envanter
                 return;
             }
 
-            MessageBox.Show("Registration successfull");
+            foreach (Control control in panel1.Controls)
+                if (control is TextBox)
+                    control.Text = "";
+
+            labelStatus.Visible = true;
+            timer1.Start();
+
+            ListUsersToGrid();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void ListUsersToGrid()
+        {
+            var cmd = _connection.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT * FROM Registration";
+            var dt = new DataTable();
+            var da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+
+            dataGridView1.DataSource = dt;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            labelStatus.Visible = false;
+            timer1.Stop();
         }
     }
 }
