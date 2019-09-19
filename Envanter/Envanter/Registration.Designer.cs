@@ -1,6 +1,6 @@
 ﻿namespace Envanter
 {
-    partial class UserRegister
+    partial class Registration
     {
         /// <summary>
         /// Required designer variable.
@@ -162,7 +162,7 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Last name";
             // 
-            // UserRegister
+            // Registration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -180,8 +180,8 @@
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxUsername);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "UserRegister";
-            this.Text = "Registration";
+            this.Name = "Registration";
+            this.Text = "User Registration";
             this.Load += new System.EventHandler(this.UserRegister_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

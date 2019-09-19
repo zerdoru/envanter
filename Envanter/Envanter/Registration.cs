@@ -5,13 +5,13 @@ using System.Windows.Forms;
 
 namespace Envanter
 {
-    public partial class UserRegister : Form
+    public partial class Registration : Form
     {
         private readonly SqlConnection _connection =
             new SqlConnection(
                 @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\bilgiislem\source\repos\envanter\Envanter\Envanter\Inventory.mdf;Integrated Security=True");
 
-        public UserRegister()
+        public Registration()
         {
             InitializeComponent();
         }
