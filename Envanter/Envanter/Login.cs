@@ -7,7 +7,7 @@ namespace Envanter
 {
     public partial class Login : Form
     {
-        SqlConnection _connection =
+        private readonly SqlConnection _connection =
             new SqlConnection(
                 @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\bilgiislem\source\repos\envanter\Envanter\Envanter\Inventory.mdf;Integrated Security=True");
 
@@ -18,10 +18,7 @@ namespace Envanter
 
         private void Login_Load(object sender, EventArgs e)
         {
-            if (_connection.State != ConnectionState.Open)
-            {
-                _connection.Open();
-            }
+            if (_connection.State != ConnectionState.Open) _connection.Open();
         }
 
         private void buttonConnect_Click(object sender, EventArgs e)
