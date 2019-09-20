@@ -91,5 +91,11 @@ namespace Envanter
             var registration = new Registration();
             registration.ShowDialog(this);
         }
+
+        private void ManageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var item = new Item();
+            item.ShowDialog(this);
+        }
     }
 }
