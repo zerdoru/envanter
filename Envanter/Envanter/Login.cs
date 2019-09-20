@@ -23,13 +23,8 @@ namespace Envanter
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            var cmd = _connection.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText =
-                $"SELECT * FROM Registration WHERE Username='{textBoxUsername.Text}' AND Password='{textBoxPassword.Text}'";
-            var dt = new DataTable();
-            var da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
+            var dt = ConnectionUtils.ExecuteCommand(_connection,
+                $"SELECT * FROM Registration WHERE Username='{textBoxUsername.Text}' AND Password='{textBoxPassword.Text}'");
 
             if (dt.Rows.Count > 0)
             {

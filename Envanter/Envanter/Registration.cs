@@ -25,14 +25,10 @@ namespace Envanter
 
         private void buttonAddUser_Click(object sender, EventArgs e)
         {
-            var cmd = _connection.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText =
-                $"INSERT INTO Registration (Username, Password, Email, FirstName, LastName) VALUES ('{textBoxUsername.Text}', '{textBoxPassword.Text}', '{textBoxEmail.Text}', '{textBoxFirstName.Text}', '{textBoxLastName.Text}')";
-
             try
             {
-                cmd.ExecuteNonQuery();
+                ConnectionUtils.ExecuteCommand(_connection,
+                    $"INSERT INTO Registration (Username, Password, Email, FirstName, LastName) VALUES ('{textBoxUsername.Text}', '{textBoxPassword.Text}', '{textBoxEmail.Text}', '{textBoxFirstName.Text}', '{textBoxLastName.Text}')");
             }
             catch (SqlException exception)
             {
@@ -54,9 +50,7 @@ namespace Envanter
                 if (control is TextBox)
                     control.Text = "";
 
-            labelStatus.Visible = true;
-            labelStatus.Text = "User successfully added";
-            timer1.Start();
+            ShowStatusLabel("User successfully added");
 
             ListUsersToGrid();
         }
@@ -65,20 +59,10 @@ namespace Envanter
         {
             var id = dataGridView1.SelectedCells[0].Value.ToString();
 
-            var cmd = _connection.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = $"DELETE FROM Registration WHERE Id='{id}'";
-            var dt = new DataTable();
-            var da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
-
+            var dt = ConnectionUtils.ExecuteCommand(_connection, $"DELETE FROM Registration WHERE Id='{id}'");
             dataGridView1.DataSource = dt;
-
-            labelStatus.Visible = true;
-            labelStatus.Text = $"User with id {id} was deleted";
-            timer1.Start();
-
             ListUsersToGrid();
+            ShowStatusLabel($"User with id {id} was deleted");
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -102,6 +86,13 @@ namespace Envanter
         {
             labelStatus.Visible = false;
             timer1.Stop();
+        }
+
+        private void ShowStatusLabel(string text)
+        {
+            labelStatus.Visible = true;
+            labelStatus.Text = text;
+            timer1.Start();
         }
     }
 }
