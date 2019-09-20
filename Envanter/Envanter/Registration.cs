@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -7,10 +6,6 @@ namespace Envanter
 {
     public partial class Registration : Form
     {
-        private readonly SqlConnection _connection =
-            new SqlConnection(
-                @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\bilgiislem\source\repos\envanter\Envanter\Envanter\Inventory.mdf;Integrated Security=True");
-
         public Registration()
         {
             InitializeComponent();
@@ -18,8 +13,6 @@ namespace Envanter
 
         private void Registration_Load(object sender, EventArgs e)
         {
-            if (_connection.State != ConnectionState.Open) _connection.Open();
-
             ListUsersToGrid();
         }
 
@@ -27,7 +20,7 @@ namespace Envanter
         {
             try
             {
-                ConnectionUtils.ExecuteCommand(_connection,
+                ConnectionUtils.ExecuteCommand(
                     $"INSERT INTO Registration (Username, Password, Email, FirstName, LastName) VALUES ('{textBoxUsername.Text}', '{textBoxPassword.Text}', '{textBoxEmail.Text}', '{textBoxFirstName.Text}', '{textBoxLastName.Text}')");
             }
             catch (SqlException exception)
@@ -59,7 +52,7 @@ namespace Envanter
         {
             var id = dataGridView1.SelectedCells[0].Value.ToString();
 
-            var dt = ConnectionUtils.ExecuteCommand(_connection, $"DELETE FROM Registration WHERE Id='{id}'");
+            var dt = ConnectionUtils.ExecuteCommand($"DELETE FROM Registration WHERE Id='{id}'");
             dataGridView1.DataSource = dt;
             ListUsersToGrid();
             ShowStatusLabel($"User with id {id} was deleted");
@@ -72,14 +65,7 @@ namespace Envanter
 
         private void ListUsersToGrid()
         {
-            var cmd = _connection.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT * FROM Registration";
-            var dt = new DataTable();
-            var da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
-
-            dataGridView1.DataSource = dt;
+            dataGridView1.DataSource = ConnectionUtils.ExecuteCommand("SELECT * FROM Registration");
         }
 
         private void timer1_Tick(object sender, EventArgs e)
