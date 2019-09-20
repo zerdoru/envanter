@@ -10,6 +10,13 @@ namespace Envanter
         public MDIParent1()
         {
             InitializeComponent();
+
+            FormClosed += OnFormClosed;
+        }
+
+        private void OnFormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -59,21 +66,6 @@ namespace Envanter
         {
         }
 
-        private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            toolStrip.Visible = toolBarToolStripMenuItem.Checked;
-        }
-
-        private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            statusStrip.Visible = statusBarToolStripMenuItem.Checked;
-        }
-
-        private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.Cascade);
-        }
-
         private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.TileVertical);
@@ -92,6 +84,12 @@ namespace Envanter
         private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (var childForm in MdiChildren) childForm.Close();
+        }
+
+        private void registrationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var registration = new Registration();
+            registration.ShowDialog(this);
         }
     }
 }

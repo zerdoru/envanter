@@ -16,14 +16,14 @@ namespace Envanter
             InitializeComponent();
         }
 
-        private void UserRegister_Load(object sender, EventArgs e)
+        private void Registration_Load(object sender, EventArgs e)
         {
             if (_connection.State != ConnectionState.Open) _connection.Open();
 
             ListUsersToGrid();
         }
 
-        private void buttonRegister_Click(object sender, EventArgs e)
+        private void buttonAddUser_Click(object sender, EventArgs e)
         {
             var cmd = _connection.CreateCommand();
             cmd.CommandType = CommandType.Text;
@@ -55,12 +55,33 @@ namespace Envanter
                     control.Text = "";
 
             labelStatus.Visible = true;
+            labelStatus.Text = "User successfully added";
             timer1.Start();
 
             ListUsersToGrid();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonDeleteUser_Click(object sender, EventArgs e)
+        {
+            var id = dataGridView1.SelectedCells[0].Value.ToString();
+
+            var cmd = _connection.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = $"DELETE FROM Registration WHERE Id='{id}'";
+            var dt = new DataTable();
+            var da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+
+            dataGridView1.DataSource = dt;
+
+            labelStatus.Visible = true;
+            labelStatus.Text = $"User with id {id} was deleted";
+            timer1.Start();
+
+            ListUsersToGrid();
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
         {
             Close();
         }
