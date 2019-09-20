@@ -35,18 +35,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // textBoxUsername
-            // 
             this.textBoxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F,
                 System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
             this.textBoxUsername.Location = new System.Drawing.Point(111, 14);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(178, 24);
             this.textBoxUsername.TabIndex = 0;
-            // 
-            // buttonConnect
-            // 
             this.buttonConnect.AutoSize = true;
             this.buttonConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F,
                 System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
@@ -57,9 +51,6 @@
             this.buttonConnect.Text = "Connect";
             this.buttonConnect.UseVisualStyleBackColor = true;
             this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
-            // 
-            // buttonExit
-            // 
             this.buttonExit.AutoSize = true;
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F,
                 System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
@@ -70,9 +61,6 @@
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
-            // 
-            // label1
-            // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular,
                 System.Drawing.GraphicsUnit.Point, ((byte) (162)));
@@ -81,9 +69,6 @@
             this.label1.Size = new System.Drawing.Size(77, 18);
             this.label1.TabIndex = 4;
             this.label1.Text = "Username";
-            // 
-            // label2
-            // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular,
                 System.Drawing.GraphicsUnit.Point, ((byte) (162)));
@@ -92,18 +77,12 @@
             this.label2.Size = new System.Drawing.Size(75, 18);
             this.label2.TabIndex = 5;
             this.label2.Text = "Password";
-            // 
-            // textBoxPassword
-            // 
             this.textBoxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.textBoxPassword.Location = new System.Drawing.Point(111, 48);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(178, 24);
             this.textBoxPassword.TabIndex = 1;
-            // 
-            // Login
-            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(303, 153);
