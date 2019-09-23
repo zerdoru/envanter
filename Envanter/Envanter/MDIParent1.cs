@@ -106,13 +106,9 @@ namespace Envanter
                 return;
             }
 
-            if (type == typeof(Registration))
-                form = new Registration {MdiParent = this};
-            else if (type == typeof(Item))
-                form = new Item {MdiParent = this};
-            else
-                throw new ArgumentException();
+            form = (Form) Activator.CreateInstance(type);
 
+            form.MdiParent = this;
             form.Show();
             form.Closing += (o, args) => _formsShown.Remove(type);
 
