@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Envanter
 {
     public partial class MDIParent1 : Form
     {
+        private readonly Dictionary<Type, Form> _formsShown = new Dictionary<Type, Form>();
         private int childFormNumber;
 
         public MDIParent1()
@@ -88,16 +90,33 @@ namespace Envanter
 
         private void registrationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var registration = new Registration();
-            registration.MdiParent = this;
-            registration.Show();
+            CreateChildIfNotExist(typeof(Registration));
         }
 
         private void ManageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var item = new Item();
-            item.MdiParent = this;
-            item.Show();
+            CreateChildIfNotExist(typeof(Item));
+        }
+
+        private void CreateChildIfNotExist(Type type)
+        {
+            if (_formsShown.TryGetValue(type, out var form))
+            {
+                form.BringToFront();
+                return;
+            }
+
+            if (type == typeof(Registration))
+                form = new Registration {MdiParent = this};
+            else if (type == typeof(Item))
+                form = new Item {MdiParent = this};
+            else
+                throw new ArgumentException();
+
+            form.Show();
+            form.Closing += (o, args) => _formsShown.Remove(type);
+
+            _formsShown.Add(type, form);
         }
     }
 }
