@@ -89,13 +89,15 @@ namespace Envanter
         private void registrationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var registration = new Registration();
-            registration.ShowDialog(this);
+            registration.MdiParent = this;
+            registration.Show();
         }
 
         private void ManageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var item = new Item();
-            item.ShowDialog(this);
+            item.MdiParent = this;
+            item.Show();
         }
     }
 }
