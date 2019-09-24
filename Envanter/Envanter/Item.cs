@@ -50,7 +50,7 @@ namespace Envanter
                         break;
                 }
 
-            ShowStatusLabel("Product successfully added");
+            AppendStatusText("Product successfully added");
 
             ListItemsToGrid();
         }
@@ -65,7 +65,7 @@ namespace Envanter
             var dt = ConnectionUtils.ExecuteCommand($"DELETE FROM Item WHERE Id='{id}'");
             dataGridView1.DataSource = dt;
             ListItemsToGrid();
-            ShowStatusLabel($"Item with id {id} was deleted");
+            AppendStatusText($"Item with id {id} was deleted");
         }
 
         private void ListItemsToGrid()
@@ -73,17 +73,9 @@ namespace Envanter
             dataGridView1.DataSource = ConnectionUtils.ExecuteCommand("SELECT * FROM Item");
         }
 
-        private void ShowStatusLabel(string text)
+        private void AppendStatusText(string text)
         {
-            labelStatus.Visible = true;
-            labelStatus.Text = text;
-            timer1.Start();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            timer1.Stop();
-            labelStatus.Visible = false;
+            textBoxStatus.Text += $"{DateTime.Now.ToString("HH:mm:ss")}: {text}\n";
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
